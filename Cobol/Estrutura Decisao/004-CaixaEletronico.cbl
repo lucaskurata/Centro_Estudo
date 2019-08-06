@@ -95,9 +95,4 @@
                END-IF
 
            END-PERFORM
-
-           IF WRK-VALOR LESS 10 OR WRK-VALOR GREATER 600
-               DISPLAY 'VALOR INVALIDO'
-           END-IF
-
            STOP RUN.
