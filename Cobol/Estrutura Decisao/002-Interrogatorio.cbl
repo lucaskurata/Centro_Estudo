@@ -47,7 +47,7 @@
                IF WRK-RESPOSTA EQUAL 'SIM' OR 'S' OR 'sim' or 's'
                    COMPUTE WRK-CONTADOR EQUAL WRK-CONTADOR + 1
                END-IF
-               COMPUTE WRK-REPETICAO EQUAL WRK-REPETICAO + 1
+               ADD 1 TO WRK-REPETICAO
            END-PERFORM.
 
            IF WRK-CONTADOR EQUAL 2
