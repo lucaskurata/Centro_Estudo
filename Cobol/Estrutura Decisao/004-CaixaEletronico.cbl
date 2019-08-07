@@ -33,10 +33,10 @@
        77 WRK-RESULTADO                PIC 9(5) VALUE ZEROS.
        77 WRK-RESTO                    PIC 9(5) VALUE ZEROS.
        77 WRK-100                      PIC 9(3) VALUE ZEROS.
-       77 WRK-50                       PIC 9(5) VALUE ZEROS.
-       77 WRK-10                       PIC 9(5) VALUE ZEROS.
-       77 WRK-5                        PIC 9(5) VALUE ZEROS.
-       77 WRK-2                        PIC 9(5) VALUE ZEROS.
+       77 WRK-50                       PIC 9(3) VALUE ZEROS.
+       77 WRK-10                       PIC 9(3) VALUE ZEROS.
+       77 WRK-5                        PIC 9(3) VALUE ZEROS.
+       77 WRK-2                        PIC 9(3) VALUE ZEROS.
        77 WRK-REPETICAO                PIC 9(1) VALUE ZEROS.
 
       *=================================================================
@@ -44,10 +44,10 @@
       *=================================================================
 
            PERFORM UNTIL WRK-REPETICAO EQUAL 1
-
+               DISPLAY 'Digite um valor entre 10 e 1000: '
                ACCEPT WRK-VALOR
 
-               IF WRK-VALOR NOT LESS 10 AND WRK-VALOR NOT GREATER 600
+               IF WRK-VALOR NOT LESS 10 AND WRK-VALOR NOT GREATER 1000
                    DIVIDE WRK-VALOR BY 100 GIVING WRK-RESULTADO
                                            REMAINDER WRK-RESTO
                                           ADD WRK-RESULTADO TO WRK-100
@@ -90,7 +90,7 @@
 
                END-IF
 
-               IF WRK-VALOR LESS 10 OR WRK-VALOR GREATER 600
+               IF WRK-VALOR LESS 10 OR WRK-VALOR GREATER 1000
                    DISPLAY 'VALOR INVALIDO, DIGITE NOVAMENTE'
                END-IF
 
