@@ -28,15 +28,15 @@
       *-----------------------------------------------------------------
       *-----------------------------------------------------------------
        WORKING-STORAGE                     SECTION.
-       77 WRK-BASE                     PIC 9(2) VALUE ZEROS.
-       77 WRK-EXPOENTE                 PIC 9(2) VALUE ZEROS.
+       77 WRK-NUMERO                   PIC 9(2) VALUE 1.
+       77 WRK-REPETICAO                PIC 9(2) VALUE ZEROS.
 
       *=================================================================
        PROCEDURE                                       DIVISION.
       *=================================================================
-           ACCEPT WRK-BASE
-           COMPUTE WRK-BASE EQUAL WRK-BASE ** WRK-EXPOENTE
-           DISPLAY 'O resultado eh: ' WRK-BASE
+           PERFORM UNTIL WRK-NUMERO EQUAL 21
+               DISPLAY WRK-NUMERO
+               ADD 1 TO WRK-NUMERO
+           END-PERFORM
 
            STOP RUN.
-x''

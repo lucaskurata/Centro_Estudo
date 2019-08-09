@@ -1,7 +1,7 @@
       *================================================================*
        IDENTIFICATION                                  DIVISION.
       *================================================================*
-       PROGRAM-ID. "001-PedeNotaDe0A10".
+       PROGRAM-ID. "014- MaiorMenorTemp".
        AUTHOR. "LUCAS KURATA".
       *================================================================*
        ENVIRONMENT                                     DIVISION.
@@ -28,15 +28,45 @@
       *-----------------------------------------------------------------
       *-----------------------------------------------------------------
        WORKING-STORAGE                     SECTION.
-       77 WRK-BASE                     PIC 9(2) VALUE ZEROS.
-       77 WRK-EXPOENTE                 PIC 9(2) VALUE ZEROS.
+       77 WRK-TEMPERATURA              PIC 9(2)V9(2) VALUE ZEROS.
+       77 WRK-MAIOR                    PIC 9(2)V9(2) VALUE ZEROS.
+       77 WRK-MENOR                    PIC 9(2)V9(2) VALUE ZEROS.
+       77 WRK-SOMA                     PIC 9(2) VALUE ZEROS.
+       77 WRK-DIVISAO                  PIC 9(2)V9(2) VALUE ZEROS.
+       77 WRK-CONT                     PIC 9(2) VALUE ZEROS.
+
 
       *=================================================================
        PROCEDURE                                       DIVISION.
       *=================================================================
-           ACCEPT WRK-BASE
-           COMPUTE WRK-BASE EQUAL WRK-BASE ** WRK-EXPOENTE
-           DISPLAY 'O resultado eh: ' WRK-BASE
+           PERFORM UNTIL WRK-TEMPERATURA EQUAL 1
+           DISPLAY 'Digite as temperaturas: '
+           ACCEPT WRK-TEMPERATURA
+               IF WRK-TEMPERATURA GREATER 1
+                   ADD WRK-TEMPERATURA TO WRK-SOMA
+                   ADD 1 TO WRK-CONT
+               END-IF
+               IF WRK-TEMPERATURA GREATER WRK-MAIOR
+                   MOVE WRK-TEMPERATURA TO WRK-MAIOR
+               END-IF
+
+               IF WRK-TEMPERATURA LESS WRK-MAIOR
+                   MOVE WRK-TEMPERATURA TO WRK-MENOR
+                   IF WRK-TEMPERATURA LESS WRK-MENOR
+                       MOVE WRK-TEMPERATURA TO WRK-MENOR
+                   END-IF
+               END-IF
+
+           END-PERFORM
+
+           DIVIDE WRK-SOMA BY WRK-CONT GIVING WRK-DIVISAO
+           DISPLAY 'Maior: ' WRK-MAIOR
+           DISPLAY 'Menor: ' WRK-MENOR
+           DISPLAY 'Media: ' WRK-DIVISAO
 
            STOP RUN.
-x''
+
+      *O Departamento Estadual de Meteorologia lhe contratou para desenvolver
+      *um programa que leia as um conjunto indeterminado de temperaturas, e
+      *informe ao final a menor e
+      *a maior temperaturas informadas, bem como a média das temperaturas.
