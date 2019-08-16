@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="classe"/>
+	<classpathentry kind="src" path="Fundamentos"/>
+	<classpathentry kind="src" path="oo"/>
+	<classpathentry kind="src" path="testeOO"/>
+	<classpathentry kind="src" path="EstruturaControle"/>
+	<classpathentry kind="src" path=".vscode"/>
+	<classpathentry kind="src" path="Colecoes"/>
+	<classpathentry kind="src" path="Exercicios"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
