@@ -37,11 +37,12 @@
        77  WRK-NEGATIVO                        PIC S9(3) VALUE -100.
       *77  PONTOS-FLUTUANTES                   PIC 9(2)V2 VALUE 30.75 .
 
+       77  WRK-DECIMAL                         PIC 9(3)V9(2).
            COPY "working.cpy".
 
 
       *-----------------------------------------------------------------
-      *=================================================================
+      *=================================================== ==============
        PROCEDURE                                       DIVISION.
       *=================================================================
            DISPLAY WRK-USUARIO .
@@ -55,6 +56,10 @@
            DISPLAY WRK-NOME.
 
            DISPLAY WRK-NEGATIVO.
+
+           DISPLAY "==============".
+           MOVE 123.99 TO WRK-DECIMAL.
+           DISPLAY WRK-DECIMAL.
 
       *    DISPLAY PONTOS-FLUTUANTES.
            STOP RUN.

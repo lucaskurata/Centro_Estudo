@@ -54,7 +54,7 @@
            DISPLAY 'Digite o total de numeros de eleitores: '
            ACCEPT WRK-ELEITORES
 
-           PERFORM UNTIL WRK-REPETICAO EQUAL WRK-ELEITORES
+           PERFORM UNTIL WRK-REPETICAO EQUAL (WRK-ELEITORES )
 
                ACCEPT WRK-VOTOS
 
@@ -75,7 +75,7 @@
            END-PERFORM
 
            DISPLAY 'Eleitor: ' WRK-A '| Total: ' WRK-VOTOA
-           DISPLAY 'Eleitor: ' WRK-B '| Total: ' WRK-VOTOC
+           DISPLAY 'Eleitor: ' WRK-B '| Total: ' WRK-VOTOB
            DISPLAY 'Eleitor: ' WRK-C '| Total: ' WRK-VOTOC
 
            STOP RUN.
