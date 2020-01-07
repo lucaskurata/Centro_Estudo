@@ -14,7 +14,7 @@
            05 WRK-NOME  PIC A(20).
            05 FILLER    PIC X(1).
            05 WRK-IDADE PIC 9(2).
-           05 FILLER    PIC A(1) VALUE "|".
+           05 FILLER    PIC X(1).
            05 WRK-RA    PIC 9(7).
 
        PROCEDURE DIVISION.
@@ -22,7 +22,6 @@
            MOVE "Lucas Kurata" TO WRK-NOME.
            MOVE 19 TO WRK-IDADE.
            MOVE 1800794 TO WRK-RA.
-
            DISPLAY WRK-ALUNO.
             STOP RUN.
        END PROGRAM YOUR-PROGRAM-NAME.
