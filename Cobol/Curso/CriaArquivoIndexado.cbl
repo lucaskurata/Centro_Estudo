@@ -29,6 +29,8 @@
        PROGRAM-BEGIN.
            OPEN OUTPUT ARQUIVO-FUNCIONARIO.
 
+           DISPLAY "Arquivo gerado com sucesso".
+
            CLOSE ARQUIVO-FUNCIONARIO.
 
        PROGRAM-DONE.

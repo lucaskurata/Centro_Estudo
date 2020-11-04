@@ -26,79 +26,94 @@
        77  ALTERACAO          PIC 9(1).
        77  MUDANCA            PIC 9(1).
        77  WRK-REPLACE        PIC X(20).
+       77  WRK-PEGA-CODIGO    PIC 9(1).
+       77  ENCONTRA-REGISTRO  PIC X.
+
 
        PROCEDURE DIVISION.
        PROGRA-BEGIN.
            OPEN I-O ARQUIVO-FUNCIONARIO.
-               PERFORM PERCORRE-ARQUIVO.
+           PERFORM PEGA-REGISTRO-FUNCIONARIO.
 
-           PERCORRE-ARQUIVO.
-           READ ARQUIVO-FUNCIONARIO RECORD AT END
-           PERFORM EXIBE-CAMPOS.
-
-       EXIBE-CAMPOS.
-           DISPLAY FUNCIONARIO-CODIGO.
-           DISPLAY FUNCIONARIO-NOME.
-           DISPLAY FUNCIONARIO-ENDERECO.
-           DISPLAY FUNCIONARIO-TELEFONE.
-           DISPLAY FUNCIONARIO-EMAIL.
-
-           DISPLAY "====================".
-           DISPLAY "Deseja alterar algum campo? (S/N)".
-           ACCEPT CONFIRMA-ALTERACAO.
-
-           IF CONFIRMA-ALTERACAO EQUAL "N"
-               GO TO PROGRAM-DONE.
-
-           IF CONFIRMA-ALTERACAO EQUAL "S"
-               PERFORM REALIZA-ALTERACAO.
-
-
-       REALIZA-ALTERACAO.
-           DISPLAY "1- FUNCIONARIO-CODIGO".
-           DISPLAY "2- FUNCIONARIO-NOME".
-           DISPLAY "3-FUNCIONARIO-ENDERECO".
-           DISPLAY "4-FUNCIONARIO-TELEFONE".
-           DISPLAY "5-FUNCIONARIO-EMAIL".
-           DISPLAY " ".
-
-           DISPLAY "Qual campo quer alterar? (1,2,3,4,5/0)".
-           ACCEPT ALTERACAO.
-
-           IF ALTERACAO EQUAL 1 OR ALTERACAO EQUAL 2 OR ALTERACAO
-               EQUAL 3 OR ALTERACAO EQUAL 4 OR ALTERACAO EQUAL 5
-               PERFORM REALIZA-PERGUNTA.
-           IF ALTERACAO EQUAL 0
-               GO TO PROGRAM-DONE.
-
-       REALIZA-PERGUNTA.
-           MOVE "Y" TO MUDANCA.
-           IF ALTERACAO EQUAL 1
-               DISPLAY "Digite o novo código: "
-               ACCEPT FUNCIONARIO-CODIGO.
-
-           IF ALTERACAO EQUAL 2
-               DISPLAY "Digite o novo nome: "
-               ACCEPT FUNCIONARIO-NOME.
-
-           IF ALTERACAO EQUAL 3
-               DISPLAY "Digite o novo endereco: "
-               ACCEPT FUNCIONARIO-ENDERECO.
-
-           IF ALTERACAO EQUAL 4
-               DISPLAY "Digite o novo telefone: "
-               ACCEPT FUNCIONARIO-TELEFONE.
-
-           IF ALTERACAO EQUAL 5
-               DISPLAY "Digite o novo e-mail: "
-               ACCEPT FUNCIONARIO-EMAIL.
-
-           PERFORM REESCREVE.
-
-       REESCREVE.
-           REWRITE FUNCIONARIO-REGISTRO.
+           PERFORM ALTERAR-REGISTRO
+              UNTIL FUNCIONARIO-CODIGO = ZEROES.
 
            CLOSE ARQUIVO-FUNCIONARIO.
-
        PROGRAM-DONE.
            STOP RUN.
+
+       PEGA-REGISTRO-FUNCIONARIO.
+      *    inicializacao das variaveis.
+           MOVE SPACE TO  FUNCIONARIO-REGISTRO.
+           MOVE ZEROS TO FUNCIONARIO-CODIGO.
+      *    pergunta qual registro deve ser alterado
+           DISPLAY "INFORME O CODIGO DO FUNCIONARIO".
+           DISPLAY "PARA ALTERAR(1-9999)".
+           DISPLAY "DIGITE 0(ZERO) PARA CANCELAR:".
+           ACCEPT CODIGO-FUNCIONARIO-ALTERAR.
+      *    atribui o codigo fornecido ao registro.
+           MOVE CODIGO-FUNCIONARIO-ALTERAR TO  FUNCIONARIO-CODIGO.
+
+           MOVE "N" TO REGISTRO-ENCONTRADO.
+
+           PERFORM ENCONTRA-REGISTRO-FUNCIONARIO
+               UNTIL REGISTRO-ENCONTRADO = "S" OR
+                     FUNCIONARIO-CODIGO = ZEROES.
+
+       ENCONTRA-REGISTRO-FUNCIONARIO.
+           MOVE "S" TO REGISTRO-ENCONTRADO.
+           READ ARQUIVO-FUNCIONARIO RECORD
+      *    se não encontrar o registro atribui N a REGISTRO-ENCONTRADO
+            INVALID KEY
+              MOVE "N" TO REGISTRO-ENCONTRADO.
+
+           IF REGISTRO-ENCONTRADO = "N"
+               DISPLAY "REGISTRO NAO ENCONTRADO"
+               DISPLAY "INFORME O CODIGO DO FUNCIONARIO"
+               DISPLAY "PARA ALTERAR(1-9999)"
+               DISPLAY "DIGITE 0(ZERO) PARA CANCELAR:"
+               ACCEPT CODIGO-FUNCIONARIO-ALTERAR.
+           MOVE CODIGO-FUNCIONARIO-ALTERAR TO FUNCIONARIO-CODIGO.
+
+       ALTERAR-REGISTRO.
+      *    exibir todos os capos do registro.
+           DISPLAY " ".
+           DISPLAY "CODIGO: " FUNCIONARIO-CODIGO.
+           DISPLAY "1.NOME: " FUNCIONARIO-NOME.
+           DISPLAY "2.ENDERECO: " FUNCIONARIO-ENDERECO.
+           DISPLAY "3. TELEFONE: " FUNCIONARIO-TELEFONE.
+           DISPLAY "4. EMAIL: " FUNCIONARIO-EMAIL.
+           DISPLAY " ".
+      *    o usuario deve escolher um campo para alterar.
+           DISPLAY "DIGITE O NUMERO DO CAMPO".
+           DISPLAY "PARA ALTERAR(1-4) OU 0(ZERO) PARA SAIR".
+           ACCEPT QUAL-CAMPO.
+           IF QUAL-CAMPO > 4
+               DISPLAY "CAMPO INVALIDO".
+
+           PERFORM MUDA-E-GRAVA-UM-CAMPO.
+
+           PERFORM PEGA-REGISTRO-FUNCIONARIO.
+
+       MUDA-E-GRAVA-UM-CAMPO.
+           IF QUAL-CAMPO = 1
+               DISPLAY "INFORME O NOME:"
+               ACCEPT FUNCIONARIO-NOME.
+
+           IF QUAL-CAMPO = 2
+               DISPLAY "INFORME O ENDERECO"
+               ACCEPT FUNCIONARIO-ENDERECO.
+
+           IF QUAL-CAMPO = 3
+               DISPLAY "INFORME O TELEFONE"
+               ACCEPT FUNCIONARIO-TELEFONE.
+           IF QUAL-CAMPO = 4
+               DISPLAY "INFORME O EMAIL"
+               ACCEPT FUNCIONARIO-EMAIL.
+
+           PERFORM REESCREVER-REGISTRO.
+
+       REESCREVER-REGISTRO.
+           REWRITE FUNCIONARIO-REGISTRO
+              INVALID KEY
+              DISPLAY "ERRO AO REESCREVER O REGSITRO!".
