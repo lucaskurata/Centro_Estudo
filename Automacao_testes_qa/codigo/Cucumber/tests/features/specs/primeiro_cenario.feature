@@ -1,10 +1,13 @@
 #language: pt
 
-Funcionalidade: Fazer uma soma.
+Funcionalidade: Calculo de soma e subtração.
 
--Eu como usuario
--eu quero fazer uma soma.
+Cenario: Fazer soma
+Dado Eu tenho 1000 reais guardados.
+Quando Recebi 3000 reais na conta.
+Então Eu vejo quanto dinheiro eu tenho no total.
 
-Cenario: Fazer uma soma
-Quando eu somo 2 + 2
-Entao o resultado tem que ser 4
+Cenario: Fazer subtração
+Dado Eu tenho 1000 reais guardados.
+Quando Paguei 100 reais em multa.
+Então Eu vejo quanto dinheiro eu tenho depois de ter pago.

@@ -1,11 +1,24 @@
-Quando('eu somo {int} {float} {int}') do |valor, float, valor2|
-    # Quando('eu somo {int} {float} {float}') do |int, float, float2|
-    # Quando('eu somo {float} {float} {int}') do |float, float2, int|
-    # Quando('eu somo {float} {float} {float}') do |float, float2, float3|
-    @soma = valor + valor2
+Dado('Eu tenho {int} reais guardados.') do |valor1|
+# Dado('Eu tenho {float} reais guardados.') do |float|
+  @antes = valor1
 end
-    
-Entao('o resultado tem que ser {int}') do |resultado|
-    # Entao('o resultado tem que ser {float}') do |float|
-    expect(@soma).to eq resultado
+
+Quando('Recebi {int} reais na conta.') do |valor2|
+# Quando('Recebi {float} reais na conta.') do |float|
+  @pagamento = valor2
+  @total = @antes + @pagamento
+end
+
+Então('Eu vejo quanto dinheiro eu tenho no total.') do
+    expect(@total).to eq 4000
+end
+
+Quando('Paguei {int} reais em multa.') do |multa|
+# Quando('Paguei {float} reais em multa.') do |float|
+    @despesa = multa
+    @sobra = @antes - @despesa
+end
+
+Então('Eu vejo quanto dinheiro eu tenho depois de ter pago.') do
+    expect(@sobra).to eq 900
 end

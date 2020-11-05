@@ -36,9 +36,16 @@ Exemplo de montagem de ambiente de testes do Cucumber:
         -Env -> Nosso arquivo de configuração
         -GemFile -> onde instalamos as GEM que precisaremos para usar no projeto
 
+* Cenário no Cucumber:
+ - Os cenários do Cucumber consistem em 3 etapas: Given(dado), Whens(quando) e Thens(então)
+ - Given(dado): finalidade de descrever um estado anterior ao momento da interação do Cliente com
+    o sistema (pré condição)
+ - When: finalidade de descrever todas as ações do usuário sobre o sistema
+ - Then: finalidade de validar o resultado obtido pelas etapas anteriores
+
 *****************************************************Rspec************************************************************************
 
-Framework semelhante ao Junit 
+Framework semelhante ao Junit
 Chamado de framework de teste de unidade
 Temos um monte de Asserts dentro de exemplos executáveis
 
