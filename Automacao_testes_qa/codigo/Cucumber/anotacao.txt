@@ -18,11 +18,11 @@ Gherkin serve como documentação do projeto, bem como para os testes automatiza
 
 ******************************************************Cucumber********************************************************************
 
-O Cucumber diz ao desenvolvedor o que ele deve escrever.
+# O Cucumber diz ao desenvolvedor o que ele deve escrever.
 
-Cucumeber foi desenvovido pela comunidade do Ruby, para apoiar o desenvolvimento de testes automatizados baseando-se na técnica de BDD
+# Cucumeber foi desenvovido pela comunidade do Ruby, para apoiar o desenvolvimento de testes automatizados baseando-se na técnica de BDD
 
-O comando [cucumber --init] vai montar os diretórios para execução de testes.
+# O comando [cucumber --init] vai montar os diretórios para execução de testes.
 Exemplo de montagem de ambiente de testes do Cucumber:
     -Vou no dir do projeto que eu quero testar, como por exemeplo : /c/git/nspic
     -Rodo o comando [mkdir tests] (diretório que vai receber a montagem do ambiente de testes do comando a baixo)
@@ -36,12 +36,52 @@ Exemplo de montagem de ambiente de testes do Cucumber:
         -Env -> Nosso arquivo de configuração
         -GemFile -> onde instalamos as GEM que precisaremos para usar no projeto
 
-* Cenário no Cucumber:
+# Cenário no Cucumber:
  - Os cenários do Cucumber consistem em 3 etapas: Given(dado), Whens(quando) e Thens(então)
  - Given(dado): finalidade de descrever um estado anterior ao momento da interação do Cliente com
     o sistema (pré condição)
  - When: finalidade de descrever todas as ações do usuário sobre o sistema
  - Then: finalidade de validar o resultado obtido pelas etapas anteriores
+
+# Esquema de cenário:
+ - Nos permite rodar vários cenários com a mesma funcionalidade mudando apenas o valor de sua saída
+ - Um esquema pe formado por uma tabela E <> (parâmetros delimitados)
+ - Um esquema de cenário é executado uma vez para cada linha, ou seja, o cenário é executado 1 vez para a primeira linha, depois
+  é executado do zero para a segunda linha, depois é executado zo zero para a terceira linha e assim vai...
+
+  # Data Table - (tabelas)
+  - São usadas para especificar grandes conjuntos de dados.
+
+  # Esquema de Cenário X Data Table
+  - Esquemas declaram diferentes valores de entrada no mesmo cenário - Tabelas são usadas para declarar um conjunto de valores para Dados
+
+  # TAG:
+  - Sintaxe: @<nome tag>
+  - Pode ser usado encima de uma funcionalidade ou encima de um cenário
+  - Utilizado para rodar alguma determinada funcionalidade ou cenário, ou seja, podemos especificar quais TAGS queremos rodar 
+  passando-os como parâmetros de execução de testes.
+  - Tipos de execução de TAG:
+    - cucumber --tags @important -> Vai rodar todas as funcionalidades ou cenários referentes a TAG
+    - cucumber --tags @important, @second -> Vai rodar todas as funcionalidades ou cenários referentes as TAGS @important e @second
+    - cucumber --tags @important, ~@second -> Vai rodar todas as funcionalidades ou cenários referentes a TAG @important EXCETO @second
+    - cucumber -T @important, @second, @third -> Vai rodar todas as funcionaldiades ou cenarios referenes as TAGS   
+    - Por exmeplo, eu quero só rodar o cenário de subtração do arquivo primeira_tag,rb, então eu rodo o comando: cucumber -t  @tag_multiplicacao  
+
+
+    # Css selector>
+    - Usados para selecionar elementos específicos de uma tela
+    - Exemplos de Css seletores:
+        - Seleção por classe (.classe):
+            -Encontrar um elemento pelo nome da Classe basta colocar o valor da classe com um "." na frente ou colocar a TAG.CLASSE.
+        - Seleção por ID (#identificador):
+            - Encontrar um elemento por ID basta colocar o valor do atributo ID com # na frente
+        - Seleção por Elementos DIV:
+            - Seleciona todos os elementos <p> onde o pai é um elemento <div>
+        - Seleção por atributo (elemento[atributo="valor"]):
+            - Seleciona todos os elements com um elemento e um atributo de destino
+        - Seleção por Filho (:first-child):
+            - Seleciona o <p> que é o primeiro filho de seu pai
+        - Seleção o elemeto <p> que é o primeiro elemento de seu pai
 
 *****************************************************Rspec************************************************************************
 
@@ -49,3 +89,168 @@ Framework semelhante ao Junit
 Chamado de framework de teste de unidade
 Temos um monte de Asserts dentro de exemplos executáveis
 
+*****************************************************Capybara*********************************************************************
+
+# O que é Capybara:
+    - Capyabra é um framework de automação de testes 
+    - Pode-se aplicar testes na web e em open source
+    - Escrito em Ruby
+    - É utilizado para simular ações reais que o usuário executaria na aplicação 
+    - Para utilizar o Capybara é necessário ter o Ruby instalado na máquina
+
+# Selenium web driver:
+    - É uma ferramenta de software livre para testes automatizados
+    - Utilizado para realizar testes na web
+    - Ele fornece recursos para navegar em páginas na web, entrada do usuário, execução Javascript e muito mais.
+
+# O que é Chromedriver:
+     - É um servidor autônomo que implementa o protocolo de Conexão do Webdriver para Chromium
+     
+# Buscando elementos:
+     - ALL(’ELEMENTO’) –> BUSCA TODOS ELEMENTOS.
+     - FIND(’ELEMENTO’) –> BUSCA UM ELEMENTO MAPEADO.
+     - FIRST(’ELEMENTO’) –> BUSCA O PRIMEIRO ELEMENTO ENCONTRADO.
+     - FIND_BUTTON —> BUSCA UM BOTÃO NA PÁGINA
+     - FIND_LINK –> BUSCA UM LINK NA PÁGINA
+     - FIND_BY_ID –> BUSCA O ELEMENTO COM O ID MAPEADO
+     - https://www.rubydoc.info/GITHUB/TEAMCAPYBARA/CAPYBARA/MASTER/CAPYBARA/NODE/FINDERS
+
+# Opções:
+     - TEXT (STRING, REGEXP) —> BUSCA POR UM TEXTO EXATAMENTE IGUAL AO PREENCHIDO.
+     - EXACT_TEXT (STRING, BOOLEAN) —> BUSCA UM STRING EXATA AO PREENCHIDA.
+     - VISIBLE (BOOLEAN, SYMBOL) —> BUSCA ELEMENTOS QUE ESTÃO VISÍVEL.
+     - COUNT (INTEGER) —> BUSCA O EXATO NÚMERO DE ELEMENTOS ENCONTRADOS NA TELA.
+     - MAXIMUM (INTEGER) —> BUSCA O MÁXIMO NÚMERO DE ELEMENTOS ENCONTRADOS NA TELA.
+     - MINIMUM (INTEGER) —> BUSCA O MINIMO NÚMERO DE ELEMENTOS ENCONTRADOS NA TELA.
+     - BETWEEN (RANGE) —> BUSCA O NÚMERO DE ELEMENTOS ENCONTRADOS EM UMA DETERMINADA RANGE.
+     - EXACT (BOOLEAN) —> BUSCA UM ELEMENTO EXATAMENTE IGUAL AO REGEX CRIANDO POR CSS OU XPATH.
+     - WAIT (INTEGER, FALSE) —> ESPERA O TEMPO DEMILITADO PRA ESPARA O ELEMENTO APARECER NA TELA.(SE NÃO PREENCHER ELE USA O TEMPO PADRÃO DO DEFAULT_MAX_WAIT_TIME)
+
+# Clicando em botões ou links:
+     - FIND(ELEMENTO).CLICK
+     - FIND(ELEMENTO).DOUBLE_CLICK
+     - FIND(ELEMENTO).RIGHT_CLICK
+     - CLICK_ON -> CLICA EM LINKS OU BOTÕES
+     - CLICK_LINK_OR_BUTTON -> TEM A MESMA FUNÇÃO DO CLICK_ON
+     - CLICK_BUTTON -> CLICA NO PRIMEIRO BOTÃO ENCONTRADO PELO LOCATOR
+     - CLICK_LINK -> CLICA NO LINK PELO ID.TEXTO OU TITLE 
+
+# Interagindo com formulários
+     - FIND(ELEMENTO).SET "CAMPO A PREENCHER"
+     - FIND(ELEMENTO).SEND_KEYS ("CAMPO A PREENCHER)
+     - FILL_IN -> LOCALIZA UM CAMPO DE TEXTO OU ÁREA DE TEXTO E PREENCHE COM O TEXTO QUE LHE FOI FORNCEDIDO
+
+# Dropdown, select e Autocomplete
+     - FIND(ELEMENTO).CLICK
+     - SELECT -> Encontra uma caixa de seleção e seleciona uma opção específica dela.
+     - UNSELECT -> Encontra uma caixa de seleção e desmarca uma opção específica dela.
+     - SELEC_OPTION -> Seleciona uma opção específica dela.
+
+# Radiobox e Checkbox
+     - FIND(ELEMENTO).CLICK
+     - CHECK -> Encontra uma caixa de seleção e marca a opção
+     - UNCHECK -> Encontra uma caixa de seleçãoe desmarca opção 
+     - CHOOSE -> Encontra um botão de opção e marca a opção
+
+# Verificando se elemento existe na tela:
+     - Assert:
+        - ASSERT_NONE_OF_SELECTOR =>AFIRMA QUE NENHUM DOS SELETORES FORNECIDOS ESTÁ
+        - PRESENTE NA PÁGINA OU NOS DESCENDENTES DO NÓ ATUAL.
+        - ASSERT_MATCHES_SELECTOR =>AFIRMA QUE O CURRENT_NODE CORRESPONDE A UM
+        - DETERMINADO SELETOR.
+        - ASSERT_TEXT =>AFIRMA QUE A PÁGINA OU O NÓ ATUAL POSSUI O CONTEÚDO DE TEXTO
+        - ESPECIFICADO, IGNORANDO QUAISQUER TAGS HTML.
+        - CASO QUEIRA CONHECER OS OUTROS ACESSE ESSE
+        - SITE.HTTPS://WWW.RUBYDOC.INFO/GITHUB/TEAMCAPYBARA/CAPYBARA/MASTER/CAPYBARA/NODE/MATCHERS
+     - Matchers:
+        - MATCHES_CSS? =>VERIFICA SE O NÓ ATUAL CORRESPONDE AO SELETOR DE CSS ESPECIFICADO.
+        - MATCHES_SELECTOR? => VERIFICA SE O NÓ ATUAL CORRESPONDE AO SELETOR ESPECIFICADO.
+        - MATCHES_XPATH? => VERIFICA SE O NÓ ATUAL CORRESPONDE A DETERMINADA EXPRESSÃO
+        - XPATH.
+        - CASO QUEIRA CONHECER OS OUTROS ACESSE ESSE
+        - SITE.HTTPS://WWW.RUBYDOC.INFO/GITHUB/TEAMCAPYBARA/CAPYBARA/MASTER/CAPYBARA/NODE/MATCHERS
+
+     - Has:
+        - HAS_SELECT? =>VERIFICA SE A PÁGINA OU O NÓ ATUAL TEM UM CAMPO DE SELEÇÃO COM O
+        - RÓTULO, O NOME OU O ID FORNECIDO.
+        - HAS_TABLE? =>VERIFICA SE A PÁGINA OU O NÓ ATUAL POSSUI UMA TABELA COM O ID OU A
+        - LEGENDA ESPECIFICADA
+        - HAS_TEXT? =>VERIFICA SE A PÁGINA OU O NÓ ATUAL TEM O CONTEÚDO DE TEXTO
+        - ESPECIFICADO, IGNORANDO TODAS AS TAGS HTML.
+        - HAS_CSS? =>VERIFICA SE UM DETERMINADO SELETOR DE CSS ESTÁ NA PÁGINA OU UM
+        - DESCENDENTE DO NÓ ATUAL.
+        - CASO QUEIRA CONHECER OS OUTROS ACESSE
+        - HTTPS://WWW.RUBYDOC.INFO/GITHUB/TEAMCAPYBARA/CAPYBARA/MASTER/CAPYBARA/NODE/MATCHERS
+
+     - Rspec Matchers:
+        - HAVE_BUTTON ⇒ VERIFICA SE A PÁGINA OU O NÓ ATUAL POSSUI UM BOTÃO COM O TEXTO, VALOR
+        - OU ID FORNECIDO.
+        - HAVE_LINK ⇒ VERIFICA SE A PÁGINA OU O NÓ ATUAL TEM UM LINK COM O TEXTO OU O ID
+        - FORNECIDO.
+        - HAVE_TEXT ⇒ AFIRMA QUE A PÁGINA OU O NÓ ATUAL POSSUI O CONTEÚDO DE TEXTO
+        - ESPECIFICADO, IGNORANDO QUAISQUER TAGS HTML.
+        - HAVE_TITLE(TITLE, **OPTIONS) ⇒ VERIFICA SE UM DETERMINADO TÍTULO ESTA NA PÁGINA.
+        - CASO QUEIRA CONHECER OS OUTROS ACESSE ESSE SITE.
+        - HTTPS://WWW.RUBYDOC.INFO/GITHUB/TEAMCAPYBARA/CAPYBARA/MASTER/CAPYBARA/RSPECMATCHERS
+
+     - Opções:
+        - TEXT (STRING, REGEXP) — BUSCA POR UM TEXTO EXATAMENTE IGUAL AO PREENCHIDO.
+        - EXACT_TEXT (STRING, BOOLEAN) — BUSCA UM STRING EXATA AO PREENCHIDA.
+        - VISIBLE (BOOLEAN, SYMBOL) — BUSCA ELEMENTOS QUE ESTÃO VISÍVEL.
+        - COUNT (INTEGER) — BUSCA O EXATO NÚMERO DE ELEMENTOS ENCONTRADOS NA TELA.
+        - MAXIMUM (INTEGER) — BUSCA O MÁXIMO NÚMERO DE ELEMENTOS ENCONTRADOS NA TELA.
+        - MINIMUM (INTEGER) — BUSCA O MINIMO NÚMERO DE ELEMENTOS ENCONTRADOS NA TELA.
+        - BETWEEN (RANGE) — BUSCA O NÚMERO DE ELEMENTOS ENCONTRADOS EM UMA DETERMINADA RANGE.
+        - EXACT (BOOLEAN) — BUSCA UM ELEMENTO EXATAMENTE IGUAL AO REGEX CRIANDO POR CSS OU XPATH.
+        - WAIT (INTEGER, FALSE) — ESPERA O TEMPO DEMILITADO PRA ESPARA O ELEMENTO APARECER NA TELA.(SE NÃO
+        - PREENCHER ELE USA O TEMPO PADRÃO DO DEFAULT_MAX_WAIT_TIME)
+
+# Mouse Hover:
+     - Vai mover o mouse até o objeto mapeado
+     - FIND(ELEMENTO).HOVER -> Move o mouse até o elemento mapeado
+     - FIND(ELEMENTO).HOVER.CLICK -> Move o mouse até o elemento mapeado e depois clica
+
+# Iframe(uma tela dentro de outra tela) e Modal(uma tela externa):
+     - Muda o foco para o elemento mapeado:
+        WITHIN(ELEMENTO) DO 
+        END 
+
+     - Muda o foco para o Iframe:
+        WITHIN_FRAME(ELEMENTO) DO 
+        END
+    
+    - Executa o bloco dentro de um determinado Fieldset dado o ID ou legenda daquele fildeset:
+        WITHIN_FIELDSET(ELEMENTO) DO 
+        END 
+
+    - Executa o bloco dado dentro de uma tabela específica, dado o ID ou legenda dessa tabela:
+        WITHIN_TABLE(ELEMENTO) DO 
+        END
+
+# Janela:
+    - WITHIN_WINDOW --ALTERNA PARA A JANELA FORNECIDA EXECUTA O BLOCO ESPECIFICADO TROCA DE VOLTA
+    - SWITCH_TO_WINDOW -- RETORNA A JANELA QUE FOI TROCADA PARA
+    - WINDOW_OPENED_BY -- OBTER A JANELA QUE FOI ABERTA PELO BLOCO PASSADO.
+    - CURRENT_WINDOW – RETORNA A JANELA ATUAL
+    - OPEN_NEW_WINDOW -- ABRE NOVA JANELA
+    - WINDOWS – OBTER TODAS AS JANELAS ABERTAS
+
+    - Opções:
+        - RESIZE_TO 800, 600 – AUMENTA O TAMANHO DA TELA COM A TAMANHO DESEJADO.
+        - .CLOSE – FECHA UMA JANELA
+        - .MAXIMIZE – MAXIMIZA UMA JANELA.
+        - .SIZE – OBTENHA O TAMANHO DA JANELA.
+        - .CURRENT? –SE ESTA JANELA É A JANELA NA QUAL OS COMANDOS ESTÃO SENDO EXECUTADOS.
+        - .CLOSED? – VERIFICA SE A JANELA ESTÁ FECHADA
+        - .EXISTS? – SE A JANELA NÃO ESTÁ FECHADA
+
+# Alert:
+    - ACCEPT_ALERT---EXECUTE O BLOCO, ACEITANDO UM ALERTA.
+    - ACCEPT_CONFIRM---EXECUTE O BLOCO, ACEITANDO UMA CONFIRMAÇÃO.
+    - DISMISS_CONFIRM---EXECUTE O BLOQUEIO, DISPENSANDO UMA CONFIRMAÇÃO.
+    - ACCEPT_PROMPT---EXECUTE O BLOCO, ACEITANDO UM PROMPT, RESPONDENDO OPCIONALMENTE AO PROMPT.
+    - DISMISS_PROMPT---EXECUTE O BLOCO, DISPENSANDO UM PROMPT.
+
+# Upload de Arquivos:
+    - ATTACH_FILE(ELEMENTO, CAMINHO DO ARQUIVO, OPÇÕES) -> Encontra um campo de arquivo e anexa o arquivo dado no caminho dado
+    
